@@ -79,11 +79,6 @@ jobs:
                 if [[ ${{contains(github.ref, 'hotfix')}}  ]]; then
                 sed -e "s|hotfix/REPLACE|${{ github.ref_name }}|" --in-place release.config.js
                 fi
-            - name: Semantic Release
-              env:
-                NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: npx --no -- semantic-release
             - name: Deploy playground to GitHub Pages
               uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847 # v3
               if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
